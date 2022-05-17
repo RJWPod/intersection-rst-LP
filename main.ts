@@ -1,4 +1,5 @@
 function Pedestrian_Crossing () {
+    basic.pause(1000)
     basic.showLeds(`
         . . # . .
         . # # # .
@@ -6,12 +7,18 @@ function Pedestrian_Crossing () {
         . # . # .
         # . . . #
         `)
-    basic.pause(1000)
-    for (let index = 0; index < 15; index++) {
+    GREEN()
+    basic.pause(5000)
+    for (let index = 0; index < 10; index++) {
+        basic.pause(500)
         basic.showNumber(Pedestrian_Crossing_Time)
         Pedestrian_Crossing_Time += -1
     }
-    Pedestrian_Crossing_Time = 15
+    Pedestrian_Crossing_Time = 10
+    YELLOW()
+    basic.pause(4000)
+    basic.pause(2000)
+    RED()
     basic.showLeds(`
         # . . . #
         . # . # .
@@ -73,6 +80,7 @@ function GREEN () {
     range.showColor(neopixel.colors(NeoPixelColors.Green))
 }
 function Pedestrian_Crossing_VI () {
+    basic.pause(1000)
     basic.showLeds(`
         . . # . .
         . # # # .
@@ -80,15 +88,20 @@ function Pedestrian_Crossing_VI () {
         . # . # .
         # . . . #
         `)
-    basic.pause(1000)
-    for (let index = 0; index < 15; index++) {
+    GREEN()
+    basic.pause(5000)
+    for (let index = 0; index < 10; index++) {
         music.playTone(988, music.beat(BeatFraction.Half))
         music.playTone(784, music.beat(BeatFraction.Half))
+        basic.pause(500)
         basic.showNumber(Pedestrian_Crossing_Time)
         Pedestrian_Crossing_Time += -1
     }
-    music.playTone(698, music.beat(BeatFraction.Whole))
-    Pedestrian_Crossing_Time = 15
+    Pedestrian_Crossing_Time = 10
+    basic.pause(4000)
+    YELLOW()
+    basic.pause(1000)
+    RED()
     basic.showLeds(`
         # . . . #
         . # . # .
@@ -110,8 +123,8 @@ let Distance = 0
 let Strip: neopixel.Strip = null
 let Pedestrian_Crossing_Time = 0
 let xyz = 1
-Pedestrian_Crossing_Time = 15
-Strip = neopixel.create(DigitalPin.P16, 3, NeoPixelMode.RGB)
+Pedestrian_Crossing_Time = 10
+Strip = neopixel.create(DigitalPin.P3, 3, NeoPixelMode.RGB)
 Strip.setBrightness(20)
 radio.setGroup(177)
 basic.showIcon(IconNames.No)
@@ -125,22 +138,10 @@ basic.forever(function () {
     }
     if (input.buttonIsPressed(Button.A)) {
         Pedestrian_Crossing()
-        basic.pause(3000)
-        GREEN()
-        basic.pause(15000)
-        YELLOW()
-        basic.pause(4000)
-        RED()
     }
     if (input.buttonIsPressed(Button.B)) {
         music.playTone(587, music.beat(BeatFraction.Quarter))
         music.playTone(698, music.beat(BeatFraction.Half))
         Pedestrian_Crossing_VI()
-        basic.pause(3000)
-        GREEN()
-        basic.pause(15000)
-        YELLOW()
-        basic.pause(4000)
-        RED()
     }
 })
