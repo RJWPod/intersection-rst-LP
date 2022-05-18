@@ -124,15 +124,12 @@ let Strip: neopixel.Strip = null
 let Pedestrian_Crossing_Time = 0
 let xyz = 1
 Pedestrian_Crossing_Time = 10
-Strip = neopixel.create(DigitalPin.P3, 3, NeoPixelMode.RGB)
+Strip = neopixel.create(DigitalPin.P16, 3, NeoPixelMode.RGB)
 Strip.setBrightness(20)
 radio.setGroup(177)
 basic.showIcon(IconNames.No)
 RED()
 basic.forever(function () {
-    for (let index = 0; index < 10; index++) {
-        Sonar()
-    }
     if (Distance > 4 && Distance < 6) {
         Vehicle()
     }
